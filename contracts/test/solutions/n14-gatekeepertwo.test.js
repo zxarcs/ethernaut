@@ -3,12 +3,9 @@ const GatekeeperTwo = artifacts.require('./levels/GatekeeperTwo.sol')
 const GatekeeperTwoAttacker = artifacts.require('./attacks/N14GatekeeperTwoAttacker.sol')
 const utils = require('../utils/TestUtils')
 const { expect } = require("chai")
-const chai = require("chai")
-const { solidity } = require("ethereum-waffle")
-chai.use(solidity)
 
 
-describe.only("Challenge 14 - GatekeeperTwo", function () {
+describe("Challenge 14 - GatekeeperTwo", function () {
     let ethernaut
     let level
     let instance

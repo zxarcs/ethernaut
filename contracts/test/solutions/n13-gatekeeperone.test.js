@@ -3,9 +3,6 @@ const GatekeeperOne = artifacts.require('./levels/GatekeeperOne.sol')
 const GatekeeperOneAttacker = artifacts.require('./attacks/N13GatekeeperOneAttacker.sol')
 const utils = require('../utils/TestUtils')
 const { expect } = require("chai")
-const chai = require("chai")
-const { solidity } = require("ethereum-waffle")
-chai.use(solidity)
 
 
 describe("Challenge 13 - GatekeeperOne", function () {
