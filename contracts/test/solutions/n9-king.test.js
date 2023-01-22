@@ -76,7 +76,6 @@ describe("Challenge 9 - King", function () {
             Because of this persistent failure, the game will be broken and no one
             will have fun playing it any more. What a wicked thing to do...
         */
-
         it("no one can become new king", async function () {
             const maliciousContract = await KingAttacker.new()
             await maliciousContract.kingMe(instance.address, { value: web3.utils.toWei("2", "ether") })

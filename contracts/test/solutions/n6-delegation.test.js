@@ -45,7 +45,6 @@ describe("Challenge 6 - Delegation", function () {
                 contract will change. In this case, the changing storage variable
                 is the owner variable
             */
-
             const txn = {
                 to: instance.address,
                 from: attacker,

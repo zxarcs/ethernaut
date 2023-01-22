@@ -51,7 +51,6 @@ describe("Challenge 11 - Elevator", function () {
             a false and then, when it is called next time, a true
             to pass this challenge.
          */
-
         it("take elevator to top floor", async function () {
             expect(await instance.top()).to.be.false
             const maliciousContract = await ElevatorAttacker.new(instance.address)

@@ -43,7 +43,6 @@ describe("Challenge 8 - Vault", function () {
             slot 0: bool public locked;
             slot 1: bytes32 private password; <- getting value here
         */
-
         it("vault is unlocked", async function () {
             const pwd = await web3.eth.getStorageAt(instance.address, 1)
             await instance.unlock(pwd)

@@ -34,7 +34,9 @@ describe("Challenge 13 - GatekeeperOne", function () {
     before(createLevelInstance)
 
     describe("Initial State", function () {
-
+        it("entrand address is the zero address", async function () {
+            expect(await instance.entrant()).to.eq("0x0000000000000000000000000000000000000000")
+        })
     })
 
     describe("Attack Execution", function () {
@@ -46,12 +48,12 @@ describe("Challenge 13 - GatekeeperOne", function () {
                 Solution: We will run our attack from a (malicious) contract. That way,
                 tx.origin and msg.sender will be different
             
-            Gate two: When opening this gate we have to have a specific amount of gas
-                left in our transaction. Specifically the gas left mod 8191 has to be zero.
+            Gate two: When opening this gate, we have to have a specific amount of gas
+                left in our transaction. Specifically, the gas left mod 8191 has to be zero.
                 
                 Solution: Since (in my case) these tests are being ran on a local blockchain,
                 I will send in 8191 transactions increasing gas by one each time. I will note
-                for the first one that has  gas used mod 8191 to equal zero.
+                for the first one that has gas used mod 8191 to equal zero.
 
             Gate three: We have to find a value that has some specific properties when
             converted to and from lower and higher types. Specifics below
@@ -62,7 +64,7 @@ describe("Challenge 13 - GatekeeperOne", function () {
                 Solution: Take our EOA and start from part 3 and work our way to part 1
                 EOA: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
                 Part 3: uint16 of our EOA equals 0x2266. uint32 of that is 0x00002266
-                Part 2: uint64 cannot be 0x0000000000002266, so lets chose 0x1000000000002266
+                Part 2: uint64 cannot be 0x0000000000002266, so let's chose 0x1000000000002266
                 part 1: already satisfied from part 3 above
                 final key: 0x1000000000002266            
         */

@@ -43,7 +43,6 @@ describe("Challenge 7 - Force", function () {
             When this happens, our attacker contract will be deleted and all it's funds
             sent to the address provided as argument to the selfdestruct function.
         */
-
         it("fund target contract", async function () {
             amountToFund = "1"
             const maliciousContract = await ForceAttacker.new()
