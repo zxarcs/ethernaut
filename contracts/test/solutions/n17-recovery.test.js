@@ -5,7 +5,7 @@ const utils = require('../utils/TestUtils')
 const { expect } = require("chai")
 
 
-describe.only("Challenge 17 - Recovery", function () {
+describe("Challenge 17 - Recovery", function () {
     let ethernaut
     let level
     let instance
@@ -42,7 +42,7 @@ describe.only("Challenge 17 - Recovery", function () {
             address and their nonce. Details on RLP encoding can be read in the
             Ethereum developer docs webpage below:
             https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/
-            Once we know what (senders address + nonce), and how (RLP encoded) we can
+            Once we know what (senders address + nonce), and how (RLP encoding) we can
             attempt to find the contract address where the funds are
         */
 
