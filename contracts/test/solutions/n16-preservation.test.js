@@ -5,19 +5,15 @@ const utils = require('../utils/TestUtils')
 const { expect } = require("chai")
 
 
-describe.only("Challenge 16 - Preservation", function () {
+describe("Challenge 16 - Preservation", function () {
     let ethernaut
     let level
     let instance
     let attacker
-    let attackerAltAddress
-
-    const initialSupply = "1000000"
 
     async function createLevelInstance() {
-        const [_attacker, _alt] = await web3.eth.getAccounts()
+        const [_attacker] = await web3.eth.getAccounts()
         attacker = _attacker
-        attackerAltAddress = _alt
 
         ethernaut = await utils.getEthernautWithStatsProxy()
         level = await PreservationFactory.new()
@@ -56,7 +52,7 @@ describe.only("Challenge 16 - Preservation", function () {
         */
         it("change the contract owner", async function () {
             const maliciousContract = await PreservationAttacker.new(instance.address)
-            await maliciousContract.attack()
+            await maliciousContract.attack(attacker)
 
             expect(await instance.owner()).to.eq(attacker)
         })

