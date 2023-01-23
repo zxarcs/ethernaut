@@ -56,9 +56,9 @@ describe("Challenge 9 - King", function () {
 
             await web3.eth.sendTransaction(tx)
 
-            expect(await instance._king()).to.be.equal(regularUser)
+            expect(await instance._king()).to.eq(regularUser)
             expect(parseInt(await utils.getBalance(web3, instance.address)))
-                .to.be.equal((parseInt(regularUserContribution) - parseInt(initialContribution)))
+                .to.eq((parseInt(regularUserContribution) - parseInt(initialContribution)))
         })
     })
 

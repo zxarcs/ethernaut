@@ -2,12 +2,9 @@ const NaughtCoinFactory = artifacts.require('./levels/NaughtCoinFactory.sol')
 const NaughtCoin = artifacts.require('./levels/NaughtCoin.sol')
 const utils = require('../utils/TestUtils')
 const { expect } = require("chai")
-const chai = require("chai")
-const { solidity } = require("ethereum-waffle")
-chai.use(solidity)
 
 
-describe.only("Challenge 15 - NaughtCoin", function () {
+describe("Challenge 15 - NaughtCoin", function () {
     let ethernaut
     let level
     let instance
