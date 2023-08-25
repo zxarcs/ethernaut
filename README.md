@@ -4,7 +4,7 @@
 
 >Tests are in `ethernaut/contracts/test/solutions/`
 
-> My short notes, exlanations and train of thought are in above location as well. They are in each test's "Attack Execution" step
+> My short notes, explanations and train of thought are in above location as well. They are in each test's "Attack Execution" step
 
 >Attacking solidity contracts are in `ethernaut/contracts/contracts/attacks/`
 
